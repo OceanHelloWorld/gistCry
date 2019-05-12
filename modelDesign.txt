@@ -1,0 +1,42 @@
+User stories:
+Create new story
+  add description
+  add file name
+  add content (add file)
+  create gist (public or secret)
+  
+  Hidden:
+  add timeStamp
+  add user name
+  create/add encrypted URl
+    
+create new revision
+  type in correct URl
+  retrieve gist
+  call edit()
+  change description
+  change file name
+  change content (add file)
+  update gist
+
+delete gist
+  prompt for user confirmation
+  delete gist
+
+Make Public/Private gist
+
+
+Subscribe/unsubscribe gist
+
+star/unstar gist
+
+write comment
+
+
+review all previous revisions
+  retrieve all diffs under current gist by order
+  on server layer that compares the diffs
+  pass to view the processe divs
+
+
+
