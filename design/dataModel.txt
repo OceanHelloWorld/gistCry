@@ -1,0 +1,30 @@
+users
+---------------
+id (pk)
+user_name
+password
+
+
+gist_edits
+---------------
+id (pk)
+time_stamp
+star
+user_name (fk)
+url
+
+
+files
+--------------
+id (pk)
+intro
+file_name
+content
+gist_edit (fk)
+
+
+gists_forked
+---------------
+id (pk)
+gist_edit (fk)
+user (fk)

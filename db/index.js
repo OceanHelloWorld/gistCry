@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
   host : 'localhost', 
   user : 'root',
   password : '',
-  database : 'grocery_list',
+  database : 'gist_list',
 
 });
 
@@ -17,7 +17,7 @@ connection.connect((err) => {
 });
 
 
-// connection.query('SELECT * FROM grocery_items', (err, data) => {
+// connection.query('SELECT * FROM users', (err, data) => {
 //   console.log(err ? err : data)
 // })
 

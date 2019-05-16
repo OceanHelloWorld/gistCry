@@ -1,0 +1,113 @@
+User stories:
+
+tradeoff:
+pro:
+
+
+con:
+  finding all the gists belong to one user can be time consuming
+  all different gists data will be stored on the client
+
+
+
+Login to github
+  client:
+    type username
+    type password
+    click submit
+    send post request with username and password
+  
+  server:
+    call findUser with {userName: userName, passworkd: password}
+  
+  db:
+    find user where username = userName, passworkd = password
+      if true, return user id and userName
+      else false, return null
+
+  server:
+    if returned null
+      return null to client
+    else
+      call db to find all gists from this user ID
+
+  db:
+    search gists table return all records matchs with ID
+    pass all records to server
+  
+  server:
+    iterate through list of gists
+    create a hashtable with gist id as key and the object as value
+      replace the value if the same id appeared before
+      because the records in DB are chronological order inserted
+      so the most recent update will be left in hashtable
+    convert the hashtable to an array, and sort it by time stamp
+
+    pass the gist array with user id and username to client
+
+  client:
+    display user name on top right corner
+    display a list of clickable links for each gists returned
+  
+Create new gist
+  client: 
+    add description
+    add file name
+    add content (add file)
+    click create gist button (public or secret)
+    send post request with description, file name, content, and user id
+
+  server:
+    catch post request
+    generate timeStamp, initialize star as 0, generate URL
+    send userID, description, file name, URL, content, time_stamp, star as an object to db
+
+  db:
+    get all 
+
+Choose existing gist
+  client 
+    click on existing gist
+    send get request with gist id
+  
+  server
+    get request: get all gists with that id
+  
+  db
+    select all gists with that id
+  
+  server
+    it should already be in chronological order
+    return to client as a list of objects for each gist commit
+
+
+create new revision
+  type in correct URl
+  retrieve gist
+  call edit()
+  change description
+  change file name
+  change content (add file)
+  update gist
+
+delete gist
+  prompt for user confirmation
+  delete gist
+
+Make Public/Private gist
+
+
+Subscribe/unsubscribe gist
+
+star/unstar gist
+
+write comment
+
+
+review all previous revisions
+  retrieve all diffs under current gist by order
+  on server layer that compares the diffs
+  pass to view the processe divs
+
+
+

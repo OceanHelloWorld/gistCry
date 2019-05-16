@@ -12,6 +12,7 @@ class Users extends Component {
   componentDidMount() {
     fetch('/api/users')
       .then(res => res.json())
+      // .then(data => {console.log('ajax: ', data);})
       .then(users => this.setState({users}, () => console.log('User fetched', users)))
   }
 
@@ -21,7 +22,7 @@ class Users extends Component {
         <h2>Users</h2>
         <ul>
           {this.state.users.map(user => 
-            <li key = {user.id}> {user.firstName} {user.lastName}</li>
+            <li key = {user.id}> {user.username} {user.password}</li>
           )}
         </ul>
       </div>

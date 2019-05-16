@@ -7,7 +7,6 @@
 
 
 -- create a database for gist_list app only if it doesn't exist
-DROP DATABASE IF EXISTS gist_list;
 CREATE DATABASE IF NOT EXISTS gist_list;
 
 USE gist_list;
@@ -42,8 +41,6 @@ CREATE TABLE IF NOT EXISTS files (
     ON DELETE CASCADE,
   PRIMARY KEY(id)
 );
-
-
 
 
 CREATE TABLE IF NOT EXISTS gists_forked (
