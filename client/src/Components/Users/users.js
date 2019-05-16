@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './users.css';
+import axios from 'axios';
 
 class Users extends Component {
   constructor() {
@@ -14,6 +15,17 @@ class Users extends Component {
       .then(res => res.json())
       // .then(data => {console.log('ajax: ', data);})
       .then(users => this.setState({users}, () => console.log('User fetched', users)))
+
+    // axios.post("/api/register", {
+    //   username: "MarkZ",
+    //   password: "f4ceb00k"
+    // })
+    // .then(function (response) {
+    //   console.log('axios post register from client: ', response);
+    // })
+    // .catch(function(error){
+    //   console.log('error: ', error);
+    // })
   }
 
   render() {
