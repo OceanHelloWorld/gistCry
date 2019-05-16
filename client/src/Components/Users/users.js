@@ -19,7 +19,7 @@ class Users extends Component {
   render() {
     return (
       <div>
-        <h2>Users</h2>
+        <h2>Login</h2>
         <ul>
           {this.state.users.map(user => 
             <li key = {user.id}> {user.username} {user.password}</li>

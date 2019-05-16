@@ -7,14 +7,15 @@
 
 
 -- create a database for gist_list app only if it doesn't exist
+-- DROP DATABASE IF EXISTS gist_list;
 CREATE DATABASE IF NOT EXISTS gist_list;
 
 USE gist_list;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT(10) NOT NULL auto_increment,
-  username VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(30) NOT NULL,
   PRIMARY KEY(id)
 );
 

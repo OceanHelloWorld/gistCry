@@ -12,25 +12,17 @@ const getAll = function(cb) {
   });
 };
 
-// add to the groceries
-// const add = function(params, cb) {
-//   var queryString = "INSERT INTO grocery_items (name, quantity) VALUES (?)";
-//   connection.query(queryString, params, (err, data) => {
-//     cb(err, data);
-//   });
-// };
-
 const add = function(username, password, cb) {
   var queryString = "INSERT INTO users (username, password) VALUES (?, ?)";
-  connection.query(queryString, [name, quantity], (err, data) => {
+  connection.query(queryString, [username, password], (err, data) => {
     cb(err, data);
   });
 };
 
-// add('carrot cake', 12, (err, data) => {
+// add("JackDorsey123", "P4ssWord123", (err, data) => {
 //   if (err) {console.log(err)};
-//   getAll((err, data) => console.log(err ? err : data));
-// });
+//   getAll((err, data) => console.log('register: ', err ? err : data));
+// })
 
 module.exports = {
   getAll,
