@@ -18,10 +18,9 @@ app.use(bodyParser.json());
 app.get('/api/users', (req, res) => {
   User.getAll((err, users) => {
     if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(users);
-    }
+      return res.status(500).send(err);
+    } 
+    res.json(users);
   })
   // const user = [
   //   {id: 1, firstName: 'John', lastName: 'Doe'},
@@ -42,6 +41,20 @@ app.post('/api/register', (req, res) => {
   })
 })
 
+app.post('/api/login', (req, res) => {
+  const {username, password} = req.body;
+  User.login(username, password, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    } else {
+      if (result.length === 0) {
+        res.json(false);
+      } else {
+        res.json(result);
+      }
+    }
+  })
+})
 
 
 

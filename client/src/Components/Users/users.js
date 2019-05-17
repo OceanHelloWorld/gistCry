@@ -6,15 +6,16 @@ class Users extends Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      username: '',
+      login: false
     }
   }
 
   componentDidMount() {
-    fetch('/api/users')
-      .then(res => res.json())
-      // .then(data => {console.log('ajax: ', data);})
-      .then(users => this.setState({users}, () => console.log('User fetched', users)))
+    // fetch('/api/users')
+    //   .then(res => res.json())
+    //   // .then(data => {console.log('ajax: ', data);})
+    //   .then(users => this.setState({users}, () => console.log('User fetched', users)))
 
     // axios.post("/api/register", {
     //   username: "MarkZ",
@@ -26,17 +27,31 @@ class Users extends Component {
     // .catch(function(error){
     //   console.log('error: ', error);
     // })
+
+    axios.post("/api/login", {
+      username: "MarkZ",
+      password: "f4ceb00k"
+    })
+    .then((response) => {
+      if (response.data) {
+        this.setState({
+          username: response.data[0].username,
+          login: true
+        })
+      } else {
+        console.log('username or password is incorrect. Please login again');
+      }
+    })
+    .catch(function(error){
+      console.log('error: ', error);
+    })
   }
 
   render() {
     return (
       <div>
         <h2>Login</h2>
-        <ul>
-          {this.state.users.map(user => 
-            <li key = {user.id}> {user.username} {user.password}</li>
-          )}
-        </ul>
+        {this.state.username}        
       </div>
     )
   }
