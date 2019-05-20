@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const { urlGen, timestamp, unixTimeToTime } = require('./serverHelper');
 
 app.use(function(req, res, next) {
   // console.log('app use: ', req.method, req.path);
@@ -52,8 +52,9 @@ app.post('/api/login', (req, res) => {
 
 // TODO:change api/newGist to api/gist
 app.post('/api/newGist', (req, res) => {
-  const { intro, fileName, content, gist } = req.body;
-  db.newGist(intro, fileName, content, gist, (err, result) => {
+  const { star, username, intro, file_name, content, gist_edit } = req.body;
+  let url = urlGen(username, gist_edit);  
+  db.newGist(timestamp, star, username, url, intro, file_name, content, gist_edit, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     } else {
@@ -61,8 +62,6 @@ app.post('/api/newGist', (req, res) => {
     }
   })
 })
-
-
 
 
 // process.env.port is for Heroku deployment

@@ -11,9 +11,6 @@ const getAllGists = function(username, cb) {
   });
 };
 
-// getAllGists('admin2', (err, data) => {
-//   console.log('data: ', data[0]['url']);
-// });
 
 const registerUser = function(username, password, cb) {
   const queryString = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -33,11 +30,11 @@ const login = function(username, password, cb) {
   })
 }
 
+
 const newGist = function(timestamp, star, username, url, intro, file_name, content, gist_edit, cb) {
-  // const queryString = "INSERT INTO gist_edits (timestamp, star, username, url) VALUES (?, ?, ?, ?); INSERT INTO files (intro, file_name, content, gist_edit) VALUES (?, ?, ?, ?)"
   const queryString1 = "INSERT INTO gist_edits (timestamp, star, username, url) VALUES (?, ?, ?, ?)";
   const queryString2 = "INSERT INTO files (intro, file_name, content, gist_edit) VALUES (?, ?, ?, ?)";
-
+  
   connection.query(queryString1, [timestamp, star, username, url], (err, data) => {
     if (err) {
       console.log('err =', err);
@@ -53,10 +50,14 @@ const newGist = function(timestamp, star, username, url, intro, file_name, conte
   });
 }
 
-newGist(1200, 0, 2, 'gf7w', 'test new file', 'server.js', 'const newServer = 10', 2, (err, data) => {
-  if (err) {console.log('db new gist: ', err)}
-  else {console.log('insert new gist success', data);}
-})
+// getAllGists('admin2', (err, data) => {
+//   console.log('data: ', data[0]['url']);
+// });
+
+// newGist(1200, 0, 2, 'gf7w', 'test new file', 'server.js', 'const newServer = 10', 2, (err, data) => {
+//   if (err) {console.log('db new gist: ', err)}
+//   else {console.log('insert new gist success', data);}
+// })
 
 // add("JackDorsey123", "P4ssWord123", (err, data) => {
 //   if (err) {console.log(err)};
