@@ -7,8 +7,55 @@ class Users extends Component {
     super();
     this.state = {
       username: '',
-      login: false
+      login: false,
+      newUsername: '',
+      newPassword: ''
     }
+  }
+
+  login() {
+    axios.post("/api/login", {
+      username: "MarkZ",
+      password: "f4ceb00k"
+    })
+    .then((response) => {
+      if (response.data) {
+        this.setState({
+          username: response.data[0].username,
+          login: true
+        })
+      } else {
+        console.log('username or password is incorrect. Please login again');
+      }
+    })
+    .catch(function(error){
+      console.log('error: ', error);
+    })
+  }
+
+  register() {
+    axios.post("/api/register", {
+      username: this.state.newUsername,
+      password: this.state.newPassword
+    })
+    .then((response) => {
+      console.log('axios post register from client: ', response);
+    })
+    .catch((error) => {
+      console.log('error: ', error);
+    })
+  }
+
+  getAllGist() {
+    axios.post("/api/gists", {
+      username: this.state.username,
+    })
+    .then((response) => {
+      console.log('axios post register from client: ', response);
+    })
+    .catch((error) => {
+      console.log('error: ', error);
+    })
   }
 
   componentDidMount() {
@@ -27,24 +74,8 @@ class Users extends Component {
     // .catch(function(error){
     //   console.log('error: ', error);
     // })
-
-    axios.post("/api/login", {
-      username: "MarkZ",
-      password: "f4ceb00k"
-    })
-    .then((response) => {
-      if (response.data) {
-        this.setState({
-          username: response.data[0].username,
-          login: true
-        })
-      } else {
-        console.log('username or password is incorrect. Please login again');
-      }
-    })
-    .catch(function(error){
-      console.log('error: ', error);
-    })
+    this.login();
+    
   }
 
   render() {

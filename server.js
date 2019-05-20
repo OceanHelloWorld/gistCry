@@ -1,4 +1,4 @@
-const User = require('./db/user');
+const db = require('./db/user');
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -15,25 +15,19 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 
 
-app.get('/api/users', (req, res) => {
-  User.getAll((err, users) => {
+app.post('/api/gists', (req, res) => {
+  const {username} = req.body;
+  db.getAllGists(username, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     } 
-    res.json(users);
+    res.json(result);
   })
-  // const user = [
-  //   {id: 1, firstName: 'John', lastName: 'Doe'},
-  //   {id: 2, firstName: 'Ghost', lastName: 'Pepper'},
-  //   {id: 3, firstName: 'Jala', lastName: 'Peno'}    
-  // ]
-
-  // res.json(user);
 })
 
 app.post('/api/register', (req, res) => {
   const {username, password} = req.body;
-  User.add(username, password, (err, result) => {
+  db.registerUser(username, password, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     }
@@ -43,7 +37,7 @@ app.post('/api/register', (req, res) => {
 
 app.post('/api/login', (req, res) => {
   const {username, password} = req.body;
-  User.login(username, password, (err, result) => {
+  db.login(username, password, (err, result) => {
     if (err) {
       return res.status(500).send(err);
     } else {
@@ -52,6 +46,18 @@ app.post('/api/login', (req, res) => {
       } else {
         res.json(result);
       }
+    }
+  })
+})
+
+// TODO:change api/newGist to api/gist
+app.post('/api/newGist', (req, res) => {
+  const { intro, fileName, content, gist } = req.body;
+  db.newGist(intro, fileName, content, gist, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    } else {
+      res.json(result);
     }
   })
 })
